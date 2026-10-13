@@ -1,2 +1,3 @@
 Student: Igor Yankovskyy
 Course: Analytics & Data Engineer
+School: Data Lab
