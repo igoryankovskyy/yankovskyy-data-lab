@@ -1,0 +1,3 @@
+FROM postgres:18
+ENV POSTGRES_USER=student
+ENV POSTGRES_DB=practice
