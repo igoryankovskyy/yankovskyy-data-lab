@@ -1,0 +1,5 @@
+sku,name,price,stock,is_active,attributes
+MN-01,Монітор 27 дюймів,8999.00,4,true,"{""size_in"": 27, ""panel"": ""IPS""}"
+SP-01,Колонка портативна,1299.00,15,true,"{""color"": ""blue"", ""battery_h"": 12}"
+CB-01,Кабель USB-C 1 м,199.00,100,true,
+LS-01,Підставка для ноутбука,749.00,0,false,"{""material"": ""aluminium""}"

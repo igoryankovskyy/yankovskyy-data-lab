@@ -1,0 +1,17 @@
+name: shop-practice
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres      #  суперкористувача 
+      POSTGRES_PASSWORD: secret      # пароль суперкористувача 
+      POSTGRES_DB: shop                 # база, яку контейнер створює під час першого запуску
+    ports:
+      - "5433:5432"                     # порт 5433 на компʼютері веде на порт 5432 у контейнері
+    volumes:
+      - pgdata:/var/lib/postgresql      # дані бази зберігаються між перезапусками контейнера
+      - ./data:/data                    # папку data видно в контейнері як /data
+
+volumes:
+  pgdata:
