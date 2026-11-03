@@ -5,18 +5,20 @@ DROP TABLE IF EXISTS
     orders,
     order_items;
 
--- таблиця customers
+-- CUSTOMERS
+DROP TABLE IF EXISTS customers;
 CREATE TABLE customers (
     customer_id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     email       text NOT NULL UNIQUE,
     full_name   text NOT NULL,
     phone       text,
-    country     text NOT NULL 
-                CHECK (country in ('PL', 'UA')),
+    country     text NOT NULL CHECK (country IN ('UA', 'PL')),
+    city        text,
     registered_at  timestamptz NOT NULL DEFAULT now()
 );
 
--- таблиця products
+-- PRODUCTS
+DROP TABLE IF EXISTS products;
 CREATE TABLE products (
     product_id  bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     sku         text NOT NULL UNIQUE,
@@ -29,11 +31,12 @@ CREATE TABLE products (
     attributes  jsonb
 );
 
--- таблиця orders
+-- ORDERS
 -- orders	order_id	первинний ключ; для нового замовлення значення видає база
 -- orders	customer_id	обовʼязковий; посилається на наявного покупця; покупця, у якого є замовлення, видалити не можна
 -- orders	status	    обовʼязковий; лише new, paid, shipped, delivered або cancelled; якщо значення не вказано, записується new
 -- orders	created_at	обовʼязковий; якщо значення не вказано, записується момент вставки рядка
+DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (
     order_id    bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     customer_id bigint NOT NULL
@@ -43,12 +46,13 @@ CREATE TABLE orders (
     created_at  timestamptz NOT NULL DEFAULT now()
 );
 
--- таблиця order_items
+-- ORDER_ITEMS
 -- order_items	order_id	посилається на наявне замовлення; під час видалення замовлення його позиції видаляються разом із ним
 -- order_items	product_id	посилається на наявний товар; товар, який є в позиціях замовлень, видалити не можна
 -- order_items	unit_price	обовʼязкова; більша за нуль; зберігається без похибки, з копійками
 -- order_items	order_id + product_id	первинний ключ: той самий товар трапляється в замовленні лише один раз
 -- order_items	quantity	обовʼязкова; більша за нуль
+DROP TABLE IF EXISTS order_items;
 CREATE TABLE order_items (
     order_id    bigint NOT NULL
                 REFERENCES orders (order_id) ON DELETE CASCADE,
@@ -56,5 +60,5 @@ CREATE TABLE order_items (
                 REFERENCES products (product_id) ON DELETE RESTRICT,
     PRIMARY KEY (order_id, product_id),
     quantity    integer NOT NULL DEFAULT 0 CHECK (quantity > 0),
-    unit_price  numeric(10, 2) NOT NULL CHECK (price > 0)
+    unit_price  numeric(10, 2) NOT NULL CHECK (unit_price > 0)
 );

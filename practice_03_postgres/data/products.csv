@@ -1,0 +1,25 @@
+product_id,sku,name,brand,category,price,stock,is_active,attributes
+1,APL-IP17-128,iPhone 17 128GB,Apple,Смартфони,44999.00,18,true,"{""color"": ""black"", ""storage_gb"": 128}"
+2,APL-IP16E-128,iPhone 16e 128GB,Apple,Смартфони,29999.00,25,true,"{""color"": ""white"", ""storage_gb"": 128}"
+3,SMS-S25-256,Galaxy S25 256GB,Samsung,Смартфони,37999.00,14,true,"{""color"": ""navy"", ""storage_gb"": 256}"
+4,SMS-A56-128,Galaxy A56 128GB,Samsung,Смартфони,16499.50,40,true,"{""storage_gb"": 128}"
+5,XMI-RN14-256,Redmi Note 14 256GB,Xiaomi,Смартфони,10499.00,55,true,
+6,GGL-PX9A-128,Pixel 9a 128GB,Google,Смартфони,21999.00,9,true,"{""color"": ""iris"", ""storage_gb"": 128}"
+7,APL-MBA13-M4,MacBook Air 13 M4,Apple,Ноутбуки,49999.00,2,true,"{""ram_gb"": 16, ""ssd_gb"": 256}"
+8,APL-MBP14-M4,MacBook Pro 14 M4,Apple,Ноутбуки,79999.00,5,true,"{""ram_gb"": 16, ""ssd_gb"": 512}"
+9,LNV-IP5-15,IdeaPad Slim 5 15,Lenovo,Ноутбуки,28999.90,12,true,"{""ram_gb"": 16, ""ssd_gb"": 512}"
+10,ASS-ZB14-OLED,Zenbook 14 OLED,ASUS,Ноутбуки,41999.00,7,true,"{""ram_gb"": 16, ""panel"": ""OLED""}"
+11,HPP-PV15,Pavilion 15,HP,Ноутбуки,26499.00,0,false,
+12,APL-IPA11-M3,iPad Air 11 M3 128GB,Apple,Планшети,29999.00,11,true,"{""storage_gb"": 128}"
+13,APL-IPD11-A16,iPad 11 A16 128GB,Apple,Планшети,17999.00,20,true,"{""storage_gb"": 128}"
+14,SMS-TABS10FE,Galaxy Tab S10 FE,Samsung,Планшети,20999.00,8,true,"{""pen"": true}"
+15,XMI-PAD7,Xiaomi Pad 7,Xiaomi,Планшети,14999.00,16,true,
+16,APL-APP3,AirPods Pro 3,Apple,Навушники,12499.00,30,true,"{""anc"": true}"
+17,APL-AP4,AirPods 4,Apple,Навушники,6999.00,45,true,"{""anc"": false}"
+18,SNY-XM5,WH-1000XM5,Sony,Навушники,13999.00,10,true,"{""anc"": true, ""color"": ""silver""}"
+19,SMS-BUDS3,Galaxy Buds3,Samsung,Навушники,5499.00,33,true,
+20,JBL-T520BT,Tune 520BT,JBL,Навушники,1799.90,60,true,"{""color"": ""blue""}"
+21,APL-AWS10-42,Apple Watch Series 10 42mm,Apple,Розумні годинники,19999.00,13,true,"{""case_mm"": 42}"
+22,SMS-GW8-40,Galaxy Watch8 40mm,Samsung,Розумні годинники,17499.00,9,true,"{""case_mm"": 40}"
+23,GRM-FR265,Forerunner 265,Garmin,Розумні годинники,18999.00,6,true,"{""gps"": true}"
+24,XMI-BAND9,Smart Band 9,Xiaomi,Розумні годинники,1599.00,0,false,
