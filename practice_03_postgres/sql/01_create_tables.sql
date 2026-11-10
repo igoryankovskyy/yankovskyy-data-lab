@@ -40,7 +40,9 @@ DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (
     order_id    bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     customer_id bigint NOT NULL
-                REFERENCES customers (customer_id) ON DELETE RESTRICT,
+                REFERENCES customers (customer_id) 
+                ON DELETE NO ACTION, -- якщо нема ордерів, то можна видалити покупця; якщо є замовлення, то видаляти не можна
+                -- ON DELETE RESTRICT,
     status      text NOT NULL DEFAULT 'new'
                 CHECK (status IN ('new', 'paid', 'shipped', 'delivered', 'cancelled')),
     created_at  timestamptz NOT NULL DEFAULT now()
@@ -57,7 +59,8 @@ CREATE TABLE order_items (
     order_id    bigint NOT NULL
                 REFERENCES orders (order_id) ON DELETE CASCADE,
     product_id  bigint NOT NULL
-                REFERENCES products (product_id) ON DELETE RESTRICT,
+                REFERENCES products (product_id) 
+                ON DELETE RESTRICT,
     PRIMARY KEY (order_id, product_id),
     quantity    integer NOT NULL DEFAULT 0 CHECK (quantity > 0),
     unit_price  numeric(10, 2) NOT NULL CHECK (unit_price > 0)
