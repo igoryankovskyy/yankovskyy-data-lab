@@ -3,7 +3,8 @@ DROP TABLE IF EXISTS
     customers,
     products,
     orders,
-    order_items;
+    order_items,
+    categories;
 
 -- CUSTOMERS
 DROP TABLE IF EXISTS customers;
