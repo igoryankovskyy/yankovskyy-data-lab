@@ -98,7 +98,7 @@ select
 from shop.orders as oo
 where oo.country_code = 'UA'
     and oo.status = 'returned_to_sender'
-    and oo.created_at between '2025-01-01' and '2025-12-31'
+    and oo.created_at >= '2025-01-01' and oo.created_at < '2026-01-01'
 order by oo.total_amount desc, oo.order_id
 limit 25 offset 50
 
