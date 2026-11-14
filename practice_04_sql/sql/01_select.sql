@@ -1,3 +1,7 @@
+SET TIME ZONE 'UTC';
+
+
+
 -- Active: 1794534791691@@maglev.proxy.rlwy.net@19669@shop_db
 
 
