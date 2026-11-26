@@ -160,3 +160,81 @@ where
 group by oi.order_id
 order by oi.order_id;
 
+
+-- Завдання 3.6. Категорії кожного бренду
+
+-- Відділ закупівель складає довідку про асортимент кожного бренду.
+
+-- Для кожного бренду зі shop.brands, який має товари в shop.products, порахуйте:
+-- products_cnt — кількість товарів бренду;
+-- categories — назви категорій товарів бренду, розділені комою і пробілом (, ),
+-- кожна назва один раз, в алфавітному порядку.
+-- Відсортуйте за brand_id.
+
+-- РЕЗУЛЬТАТ.
+-- Один рядок — один бренд.
+-- Колонки:
+-- brand_id, brand_name, products_cnt, categories.
+
+-- EXPLAIN (ANALYZE, BUFFERS)
+SELECT
+    bb.brand_id,
+    bb.name as brand_name,
+    count(distinct pp.product_id) as products_cnt,
+    string_agg(distinct cc.name, ', ' order by cc.name) as categories
+from shop.brands as bb 
+join shop.products as pp on bb.brand_id = pp.brand_id
+join shop.categories as cc on cc.category_id = pp.category_id
+group by bb.brand_id
+order by bb.brand_id;
+
+
+
+-- GEMINI оптимізація -- Завдання 3.6
+-- EXPLAIN (ANALYZE, BUFFERS)
+WITH brand_category_stats AS (
+    SELECT
+        pp.brand_id,
+        cc.name AS category_name,
+        COUNT(*) AS category_products_cnt
+    FROM shop.products AS pp
+    JOIN shop.categories AS cc
+        ON cc.category_id = pp.category_id
+    GROUP BY
+        pp.brand_id,
+        cc.category_id,
+        cc.name
+)
+SELECT
+    bb.brand_id,
+    bb.name AS brand_name,
+    SUM(bcs.category_products_cnt) AS products_cnt,
+    STRING_AGG(bcs.category_name, ', ' ORDER BY bcs.category_name ASC) AS categories
+FROM shop.brands AS bb
+JOIN brand_category_stats AS bcs
+    ON bcs.brand_id = bb.brand_id
+GROUP BY
+    bb.brand_id,
+    bb.name
+ORDER BY
+    bb.brand_id ASC;
+
+
+-- CLAUDE оптимізація
+-- EXPLAIN (ANALYZE, BUFFERS)
+WITH brand_cat AS (
+    SELECT brand_id, category_id, count(*) AS cnt
+    FROM shop.products
+    GROUP BY brand_id, category_id
+)
+SELECT
+    bb.brand_id,
+    bb.name AS brand_name,
+    sum(bc.cnt)                                   AS products_cnt,
+    string_agg(cc.name, ', ' ORDER BY cc.name)    AS categories
+FROM shop.brands bb
+JOIN brand_cat bc        ON bc.brand_id = bb.brand_id
+JOIN shop.categories cc  ON cc.category_id = bc.category_id
+GROUP BY bb.brand_id, bb.name
+ORDER BY bb.brand_id;
+
