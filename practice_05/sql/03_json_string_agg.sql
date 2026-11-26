@@ -132,4 +132,31 @@ where pp.category_id = 22
 
 
 
--- 
+-- Завдання 3.5. Склад замовлення одним рядком
+
+-- Служба підтримки хоче бачити склад кожного замовлення в одній клітинці таблиці.
+
+-- Для замовлень з Польщі зі shop.orders, створених 24 грудня 2025 року, порахуйте:
+-- items_cnt — кількість позицій замовлення в shop.order_items;
+-- products — назви товарів замовлення, розділені крапкою з комою і пробілом (; ),
+-- у порядку зростання sku.
+-- Відсортуйте за order_id.
+
+-- РЕЗУЛЬТАТ.
+-- Один рядок — одне замовлення.
+-- Колонки:
+-- order_id, items_cnt, products.
+
+SELECT
+    oi.order_id,
+    count(*) as items_cnt,
+    string_agg(pp.name, '; ' order by pp.sku) as products
+from shop.orders as oo
+join shop.order_items as oi on oi.order_id = oo.order_id
+join shop.products as pp on pp.product_id = oi.product_id
+where 
+    country_code = 'PL'
+    and oo.created_at >= '2025-12-24' and oo.created_at < '2025-12-25'
+group by oi.order_id
+order by oi.order_id;
+
